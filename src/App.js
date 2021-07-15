@@ -29,7 +29,7 @@ function App() {
                     <div className="content">
                         <h3>Potrzebujesz strony internetowej? Jesteś w dobry miejscu!</h3>
                         <p>Jestem freelancerem, zajmuję się stronami internetowymi. Informatyka to moja pasja.</p>
-                        <p>Oferuję zróżnicowane usługi informatycznie, głównie tworzenie nowoczesnych stron www, ale też edycja istniejących, opieka nad stroną, konsultacje. Masz pytanie? Kto pyta nie błądzi: <Link to='/kontakt'>kontaktu</Link>.</p>
+                        <p>Oferuję zróżnicowane usługi informatycznie, głównie tworzenie nowoczesnych stron www, ale też edycja istniejących, opieka nad stroną, konsultacje. Masz pytanie? Kto pyta nie błądzi: <Link to='/kontakt'>kontakt</Link>.</p>
                         <h3>Projekty:</h3>
                         <a rel='external noopener noreferrer' href='https://lo1plan.azurewebsites.net/' target='_blank'>
                             <div className='img-wrapper'>
