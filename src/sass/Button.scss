@@ -1,0 +1,24 @@
+@use 'config';
+
+button {
+    font-size: 1em;
+    padding: 0.7em;
+    border-radius: 0.5em;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid darken(config.$secondary-clr, 30%);
+    border-left: none;
+    background-color: config.$secondary-clr;
+    &:hover, &:focus{
+        cursor: pointer;
+        $lighten: 2%;
+        background-color: lighten(config.$secondary-clr, $lighten);
+        border-bottom: 2px solid darken(config.$secondary-clr, 30% - $lighten);
+    }
+    &:active {
+        $lighten: 7%;
+        background-color: lighten(config.$secondary-clr, $lighten);
+        border-top: 2px solid rgba(0,0,0,0);
+        border-bottom: 0px solid rgba(0,0,0,0);
+    }
+}

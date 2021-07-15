@@ -1,0 +1,52 @@
+@use 'config';
+
+.order-form {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    text-align: left;
+    @media screen and (min-width: config.$content-width) {
+        // desktop
+        margin-top: 2em;
+        grid-template-columns: 1fr 2fr;
+        grid-column-gap: 1em;
+        text-align: right;
+    }
+
+    %inclass {
+        display: block;
+        box-sizing: border-box;
+        font-size: 1rem;
+        border-radius: 0.3em;
+        border: 1px solid gray;
+        box-shadow: 0px 1px 1px gray;
+        @media screen and (min-width: config.$content-width) {
+            margin: 1em 0em; // desktop
+        }
+    }
+    input {
+        @extend %inclass;
+        min-height: 2em;
+    }
+    textarea {
+        @extend %inclass;
+        min-height: 10em;
+        resize: vertical;
+        font-size: 1.1rem;
+    }
+    label {
+        margin: 1em 0em 0.1em 0em; // mobile
+        @media screen and (min-width: config.$content-width) {
+            // desktop
+            margin: 1em 0em 0.5em 0em;
+        }
+    }
+    button {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        width: 100%;
+        @media screen and (min-width: config.$content-width) {
+            grid-column: 2;
+        }
+    }
+}

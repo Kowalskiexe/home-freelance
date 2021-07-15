@@ -1,0 +1,36 @@
+.form {
+  border: 2px dashed #aa8888;
+  border-radius: 0.5em;
+  width: min(40ch, 100%);
+  margin: 0em auto 0em auto;
+  box-sizing: border-box;
+  padding: 2em 2em 1em 2em;
+}
+.form h3 {
+  margin-top: 0%;
+}
+.form form textarea, .form form input {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  border-radius: 0.3em;
+  border-style: none;
+}
+.form form input {
+  font-size: 1em;
+  height: 1.7em;
+}
+.form form textarea {
+  min-height: 10em;
+  margin-bottom: 2em;
+  resize: vertical;
+}
+.form form label {
+  display: block;
+  margin: 1em 0em 0.5em 0em;
+}
+.form form button {
+  width: 100%;
+}
+
+/*# sourceMappingURL=ContactForm.css.map */

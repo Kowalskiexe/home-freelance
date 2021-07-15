@@ -1,0 +1,22 @@
+@use 'config';
+
+footer {
+    grid-column: 1/4;
+    grid-row: 3;
+    background-color: config.$primary-clr;
+    border-top: 1px solid darken(config.$primary-clr, 10%);
+    display: grid;
+    padding: 1ch;
+    @media screen and (min-width: config.$content-width * 1.5) {
+        padding: 2em;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.author-link {
+    color: config.$font-clr;
+    text-decoration: none;
+    &:hover, &:focus {
+        text-decoration: underline;
+    }
+}

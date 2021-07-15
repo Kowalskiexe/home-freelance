@@ -1,0 +1,22 @@
+button {
+  font-size: 1em;
+  padding: 0.7em;
+  border-radius: 0.5em;
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid #851e2a;
+  border-left: none;
+  background-color: #db616f;
+}
+button:hover, button:focus {
+  cursor: pointer;
+  background-color: #dd6977;
+  border-bottom: 2px solid #8d202d;
+}
+button:active {
+  background-color: #e27e89;
+  border-top: 2px solid rgba(0, 0, 0, 0);
+  border-bottom: 0px solid rgba(0, 0, 0, 0);
+}
+
+/*# sourceMappingURL=Button.css.map */

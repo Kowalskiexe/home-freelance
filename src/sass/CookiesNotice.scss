@@ -1,0 +1,47 @@
+$notice-clr: rgb(247, 218, 126);
+
+@keyframes hide {
+    from {
+        bottom: 0px;
+    }
+    to {
+        bottom: -10em;//////
+    }
+}
+
+.cookies-notice {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: $notice-clr;
+    border-top: 1px solid darken($notice-clr, 30%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    i {
+        margin: 0em 1em;
+        cursor: pointer;
+    }
+    button {
+        display: inline-block;
+        margin: 0em 0em;
+        background-color: lighten($notice-clr, 10%);
+        border-bottom-color: darken($notice-clr, 30%);
+        &:hover, &:focus {
+            background-color: lighten($notice-clr, 13%);
+            border-bottom-color: darken($notice-clr, 27%);
+        }
+    }
+    p {
+        display: inline-block;
+        margin: 0em 1em;
+    }
+    &.hide {
+        animation: hide 0.5s normal forwards;
+    }
+    &.hidden {
+        bottom: -10em;
+    }
+}

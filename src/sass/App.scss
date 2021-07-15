@@ -1,0 +1,76 @@
+@use 'config';
+@use 'sass:math';
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr min(100%, #{config.$content-width}) 1fr;
+}
+
+.content {
+    grid-column: 2/3;
+    grid-row: 2;
+    background-color: config.$neutral-clr;
+    box-sizing: border-box;
+    padding: 1ch; // mobile
+    @media screen and (min-width: config.$content-width) {
+        padding: 4ch; // desktop
+    }
+    border-left: 1px dashed #eee;
+    border-right: 1px dashed #eee;
+}
+
+.img-wrapper {
+    margin: 2ch;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    max-height: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+$favicon-size: 3em;
+$favicon-smaller-ratio: 0.6;
+@function favicon-h($size) {
+    @return max(1em, math.div($size, 3));
+}
+@function favicon-p($size) {
+    @return min(math.div($size - 1em, 2), math.div($size, 3));
+}
+
+.favicon {
+    display: inline-block;
+    width: $favicon-size;
+    height: $favicon-size;
+}
+
+.favicon-smaller {
+    @extend .favicon;
+    width: $favicon-size * $favicon-smaller-ratio;
+    height: $favicon-size * $favicon-smaller-ratio;
+}
+
+.link-p {
+    margin: 0em 1em;
+    display: inline-block;
+    vertical-align: top;
+    height: favicon-h($favicon-size);
+    padding: favicon-p($favicon-size) 0em;
+    
+}
+
+.link-p-smaller {
+    @extend .link-p;
+    height: favicon-h($favicon-size * $favicon-smaller-ratio);
+    padding: favicon-p($favicon-size * $favicon-smaller-ratio) 0em;
+}
+
+a p:hover, a p:focus {
+    text-decoration: underline;
+}
+
+hr {
+    margin: 2em 0em;
+}

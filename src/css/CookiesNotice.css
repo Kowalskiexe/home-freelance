@@ -1,0 +1,46 @@
+@keyframes hide {
+  from {
+    bottom: 0px;
+  }
+  to {
+    bottom: -10em;
+  }
+}
+.cookies-notice {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #f7da7e;
+  border-top: 1px solid #cfa10d;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+.cookies-notice i {
+  margin: 0em 1em;
+  cursor: pointer;
+}
+.cookies-notice button {
+  display: inline-block;
+  margin: 0em 0em;
+  background-color: #fae8ae;
+  border-bottom-color: #cfa10d;
+}
+.cookies-notice button:hover, .cookies-notice button:focus {
+  background-color: #fbecbc;
+  border-bottom-color: #deac0e;
+}
+.cookies-notice p {
+  display: inline-block;
+  margin: 0em 1em;
+}
+.cookies-notice.hide {
+  animation: hide 0.5s normal forwards;
+}
+.cookies-notice.hidden {
+  bottom: -10em;
+}
+
+/*# sourceMappingURL=CookiesNotice.css.map */

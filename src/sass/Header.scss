@@ -1,0 +1,71 @@
+@use 'config';
+@use 'sass:math';
+
+$border-height: 3rem;
+
+:root {
+    --bg-height: 40px;
+}
+
+.header {
+    grid-column: 1/4;
+    background-color: rgba(0, 0, 0, 0);
+    min-height: 15rem;
+    display: grid;
+    grid-template-rows: 2fr 1fr 3fr 1em math.div($border-height, 2);
+    overflow: hidden;
+    text-align: center;
+
+    .bg {
+        position: absolute;
+        width: 100%;
+        height: var(--bg-height);
+        z-index: -1;
+        filter: blur(5px)
+    }
+
+    .border {
+        grid-row: 5;
+        width: 100%;
+        height: $border-height;
+        background-color: config.$neutral-clr;
+        border-radius: 50%;
+    }
+
+    .title {
+        grid-row: 3;
+        text-align: center;
+        margin: 0ch 1ch;
+    }
+    a {
+        color: config.$font-clr;
+        text-decoration: none;
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.nav-it {
+    background-color: rgba(0, 0, 0, 0);
+    border-bottom-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 0%;
+    margin: 1rem;
+    
+    &.active { // . , not :
+        border-bottom-style: solid;
+        border-bottom-color: config.$font-clr;
+    }
+    &:hover, &:focus{
+        border-bottom-style: solid;
+        border-bottom-color: lighten(config.$font-clr, 40);
+        color: lighten(config.$font-clr, 20);
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
