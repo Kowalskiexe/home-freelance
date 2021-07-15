@@ -40,6 +40,11 @@ $favicon-smaller-ratio: 0.6;
     @return min(math.div($size - 1em, 2), math.div($size, 3));
 }
 
+.link-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .favicon {
     display: inline-block;
     width: $favicon-size;
@@ -55,8 +60,7 @@ $favicon-smaller-ratio: 0.6;
 .link-p {
     margin: 0em 1em;
     display: inline-block;
-    vertical-align: top;
-    height: favicon-h($favicon-size);
+    min-height: favicon-h($favicon-size);
     padding: favicon-p($favicon-size) 0em;
     
 }
@@ -65,6 +69,10 @@ $favicon-smaller-ratio: 0.6;
     @extend .link-p;
     height: favicon-h($favicon-size * $favicon-smaller-ratio);
     padding: favicon-p($favicon-size * $favicon-smaller-ratio) 0em;
+}
+
+a {
+    color: darken(config.$primary-clr, 35%);
 }
 
 a p:hover, a p:focus {

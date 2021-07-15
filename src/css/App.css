@@ -30,6 +30,11 @@ img {
   margin-right: auto;
 }
 
+.link-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .favicon, .favicon-smaller {
   display: inline-block;
   width: 3em;
@@ -44,14 +49,17 @@ img {
 .link-p, .link-p-smaller {
   margin: 0em 1em;
   display: inline-block;
-  vertical-align: top;
-  height: 1em;
+  min-height: 1em;
   padding: 1em 0em;
 }
 
 .link-p-smaller {
   height: 1em;
   padding: 0.4em 0em;
+}
+
+a {
+  color: #684b4b;
 }
 
 a p:hover, a p:focus {

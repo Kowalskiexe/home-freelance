@@ -53,10 +53,13 @@
   border-bottom-style: solid;
   border-bottom-color: black;
 }
-.nav-it:hover, .nav-it:focus {
+.nav-it:hover {
   border-bottom-style: solid;
   border-bottom-color: #666666;
   color: #333333;
+  background-color: rgba(0, 0, 0, 0);
+}
+.nav-it:focus {
   background-color: rgba(0, 0, 0, 0);
 }
 

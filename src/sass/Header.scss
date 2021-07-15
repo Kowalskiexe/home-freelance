@@ -58,14 +58,17 @@ $border-height: 3rem;
     border-radius: 0%;
     margin: 1rem;
     
-    &.active { // . , not :
+    &.active { // . not :
         border-bottom-style: solid;
         border-bottom-color: config.$font-clr;
     }
-    &:hover, &:focus{
+    &:hover {
         border-bottom-style: solid;
         border-bottom-color: lighten(config.$font-clr, 40);
         color: lighten(config.$font-clr, 20);
+        background-color: rgba(0, 0, 0, 0);
+    }
+    &:focus {
         background-color: rgba(0, 0, 0, 0);
     }
 }
