@@ -12,6 +12,7 @@ $notice-clr: rgb(247, 218, 126);
 .cookies-notice {
     position: fixed;
     bottom: 0px;
+    box-sizing: border-box;
     width: 100%;
     background-color: $notice-clr;
     border-top: 1px solid darken($notice-clr, 30%);

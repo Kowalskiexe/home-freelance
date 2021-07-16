@@ -2,6 +2,23 @@ import React from 'react';
 import { useRef } from 'react';
 import '../css/CookiesNotice.css';
 import Button from './Button';
+import firebase from 'firebase/app';
+import 'firebase/analytics';
+import 'firebase/performance';
+
+const areCookiesAccepted = () => {
+    let cookies = document.cookie.split(';');
+    let accepts = false;
+    cookies.every(e => {
+        e = e.trim();
+        if (e.indexOf('accept_cookies') === 0) {
+            accepts = true;
+            return false;
+        }
+        return true;
+    });
+    return accepts;
+}
 
 function CookiesNotice() {
     const divRef = useRef();
@@ -13,20 +30,8 @@ function CookiesNotice() {
     const acceptCookies = () => {
         hide();
         document.cookie = `accept_cookies=true; expires=${(new Date(Date.now() + 30*24*60*60*1000)).toUTCString()}; paht=/`;
-    }
-
-    const areCookiesAccepted = () => {
-        let cookies = document.cookie.split(';');
-        let accepts = false;
-        cookies.every(e => {
-            e = e.trim();
-            if (e.indexOf('accept_cookies') === 0) {
-                accepts = true;
-                return false;
-            }
-            return true;
-        });
-        return accepts;
+        const pref = firebase.performance();
+        const analytics = firebase.analytics();
     }
 
     return (
@@ -39,3 +44,4 @@ function CookiesNotice() {
 }
 
 export default CookiesNotice;
+export { areCookiesAccepted };

@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import OrderForm from './components/OrderForm';
-import CookiesNotice from './components/CookiesNotice';
+import CookiesNotice, { areCookiesAccepted } from './components/CookiesNotice';
 
 function App() {
     const firebaseConfig = {
@@ -22,8 +22,11 @@ function App() {
     if (firebase.apps.length === 0) {
         firebase.initializeApp(firebaseConfig);
     }
-    const pref = firebase.performance();
-    const analytics = firebase.analytics();
+    if (areCookiesAccepted()) {
+        console.log('cookies accepted');
+        const pref = firebase.performance();
+        const analytics = firebase.analytics();
+    }
 
     return (
         <Router>
@@ -39,8 +42,10 @@ function App() {
                             <div className='img-wrapper'>
                                 <img src='img/screenshots/lo1plan.png' alt='Plan lekcji dla LO im. Stanisława Staszica w Lublinie' />
                             </div>
-                            <img src='https://lo1plan.azurewebsites.net/img/staszic-beztekstu.png' className='favicon' alt='favicon strony' />
-                            <p className='link-p'>Plan lekcji dla LO im. Stanisława Staszica w Lublinie (lo1plan.azurewebsites.net)</p>
+                            <div className='link-wrapper'>
+                                <img src='https://lo1plan.azurewebsites.net/img/staszic-beztekstu.png' className='favicon' alt='favicon strony' />
+                                <p className='link-p'>Plan lekcji dla LO im. Stanisława Staszica w Lublinie (lo1plan.azurewebsites.net)</p>
+                            </div>
                         </a>
                         <p>Więcej projektów w zakładce <Link to='/oferta'>Oferta</Link>.</p>
                     </div>

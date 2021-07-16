@@ -9,6 +9,7 @@
 .cookies-notice {
   position: fixed;
   bottom: 0px;
+  box-sizing: border-box;
   width: 100%;
   background-color: #f7da7e;
   border-top: 1px solid #cfa10d;
