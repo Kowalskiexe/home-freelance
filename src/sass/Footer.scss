@@ -1,8 +1,6 @@
 @use 'config';
 
 footer {
-    grid-column: 1/4;
-    grid-row: 3;
     background-color: config.$primary-clr;
     border-top: 1px solid darken(config.$primary-clr, 10%);
     display: grid;
@@ -19,4 +17,10 @@ footer {
     &:hover, &:focus {
         text-decoration: underline;
     }
+}
+
+.footer-lang-switcher {
+    text-decoration: underline;
+    margin-left: 2em;
+    cursor: pointer;
 }

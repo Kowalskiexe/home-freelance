@@ -1,6 +1,4 @@
 footer {
-  grid-column: 1/4;
-  grid-row: 3;
   background-color: #bfa6a6;
   border-top: 1px solid #aa8888;
   display: grid;
@@ -19,6 +17,12 @@ footer {
 }
 .author-link:hover, .author-link:focus {
   text-decoration: underline;
+}
+
+.footer-lang-switcher {
+  text-decoration: underline;
+  margin-left: 2em;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=Footer.css.map */

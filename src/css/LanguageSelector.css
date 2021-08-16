@@ -1,0 +1,41 @@
+.lang-select {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25em;
+  background-color: black;
+  color: white;
+  overflow: hidden;
+  position: relative;
+  padding: 0em;
+}
+.lang-select .lang-opt {
+  display: flex;
+  padding: 0px;
+}
+.lang-select img {
+  height: 1.5em;
+  margin: 0.75em;
+  border-radius: 0.25em;
+}
+.lang-select.desktop {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-bottom-left-radius: 0.25em;
+}
+.lang-select.mobile .lang-opt {
+  margin-right: 1em;
+}
+.lang-select.hide {
+  animation: ls-hide 0.3s forwards;
+}
+@keyframes ls-hide {
+  from {
+    height: 3em;
+  }
+  to {
+    height: 0px;
+  }
+}
+
+/*# sourceMappingURL=LanguageSelector.css.map */

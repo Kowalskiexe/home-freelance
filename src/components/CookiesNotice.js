@@ -1,27 +1,17 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import '../css/CookiesNotice.css';
 import Button from './Button';
-import firebase from 'firebase/app';
-import 'firebase/analytics';
+import { LanguageManager as LM } from '../js/languageManager';
+import CookiesManager from '../js/cookiesManager';
+import firebase from "firebase/app";
 import 'firebase/performance';
-
-const areCookiesAccepted = () => {
-    let cookies = document.cookie.split(';');
-    let accepts = false;
-    cookies.every(e => {
-        e = e.trim();
-        if (e.indexOf('accept_cookies') === 0) {
-            accepts = true;
-            return false;
-        }
-        return true;
-    });
-    return accepts;
-}
+import 'firebase/analytics';
 
 function CookiesNotice() {
     const divRef = useRef();
+    const [lang, setLang] = useState('en');
+    LM.getLanguage().then((lang) => setLang(lang));
+    LM.addHook(setLang);
 
     const hide = () => {
         divRef.current.classList.add('hide');
@@ -29,19 +19,20 @@ function CookiesNotice() {
 
     const acceptCookies = () => {
         hide();
-        document.cookie = `accept_cookies=true; expires=${(new Date(Date.now() + 30*24*60*60*1000)).toUTCString()}; paht=/`;
-        const pref = firebase.performance();
-        const analytics = firebase.analytics();
+        CookiesManager.acceptCookies();
+        firebase.performance();
+        firebase.analytics();
     }
 
     return (
-        <div className={areCookiesAccepted() ? 'cookies-notice hidden' : 'cookies-notice'} ref={divRef}>
-            <p>Ta strona wykorzystuje pliki <a rel='external noreferrer noopener' href='https://pl.wikipedia.org/wiki/HTTP_cookie' target='_blank'>cookies</a></p>
-            <Button onclick={acceptCookies}>Akceptuję</Button>
+        <div className={CookiesManager.areCookiesAccepted() ? 'cookies-notice hidden' : 'cookies-notice'} ref={divRef}>
+            <p>{{pl: 'Ta strona wykorzystuje pliki', en: 'This site uses'}[lang]} <a rel='external noreferrer noopener' href={`https://${lang}.wikipedia.org/wiki/HTTP_cookie`}
+                target='_blank'>cookies</a>
+            </p>
+            <Button onclick={acceptCookies}>{{pl: 'Akceptuję', en: 'Accept'}[lang]}</Button>
             <i onClick={hide} className="fas fa-times"></i>
         </div>
     );
 }
 
 export default CookiesNotice;
-export { areCookiesAccepted };
