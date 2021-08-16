@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../css/Footer.css';
 import ContactForm from './ContactForm';
 import { LanguageManager as LM } from '../js/languageManager';
 
 function Footer() {
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then(lang => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
     return (
         <footer>
             <div>

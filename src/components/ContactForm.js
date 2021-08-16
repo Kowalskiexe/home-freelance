@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRef } from 'react';
 import '../css/ContactForm.css';
 import Button from './Button';
@@ -13,9 +13,7 @@ function ContactForm() {
     const telRef = useRef();
     const contentRef = useRef();
 
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then((lang) => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
 
     const send = () => {
         console.log('sending');

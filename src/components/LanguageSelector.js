@@ -1,14 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../css/LanguageSelector.css';
 import { LanguageManager as LM } from '../js/languageManager';
 
 function LanguageSelector() {
     const mediaQuery = window.matchMedia("screen and (min-width: 80ch)");
+
+    const [matched, setMatched] = useState(mediaQuery.matches);
+    useEffect(() => {
+        const reevaluateMediaQuery = () => setMatched(mediaQuery.matches);
+        window.addEventListener('resize', reevaluateMediaQuery);
+        return () => {
+            window.removeEventListener('resize', reevaluateMediaQuery);
+        }
+    }, []);
+
     const divRef = useRef();
 
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then(lang => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
 
     const selectLang = lang => {
         console.log(`selected ${lang}`);
@@ -22,16 +30,16 @@ function LanguageSelector() {
     }
 
     return (
-        <div className={mediaQuery.matches ? 'lang-select desktop' : 'lang-select mobile'} ref={divRef}>
+        <div className={matched ? 'lang-select desktop' : 'lang-select mobile'} ref={divRef}>
             <div className='lang-opt' onClick={() => selectLang('en')}>
                 <img src='img/flags/uk.svg' alt='english' title='English' />
-                {mediaQuery.matches ? '' : <p>English</p>}
+                {matched ? '' : <p>English</p>}
             </div>
             <div className='lang-opt' onClick={() => selectLang('pl')}>
                 <img src='img/flags/poland.svg' alt='polski' title='Polski' />
-                {mediaQuery.matches ? '' : <p>Polski</p>}
+                {matched ? '' : <p>Polski</p>}
             </div>
-            {mediaQuery.matches ? '' :
+            {matched ? '' :
                 <img src='img/icons/x.svg'
                     alt={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}
                     title={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}

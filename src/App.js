@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import firebase from "firebase/app";
 import 'firebase/performance';
 import 'firebase/analytics';
@@ -43,9 +43,8 @@ function App() {
         document.head.children[i].content = desc;
     }
     
-    const [lang, setLang] = useState('en');
+    const [lang] = LM.useLanguage();
     const updateLang = lang => {
-        setLang(lang);
         LM.setHTMLLang(lang);
         setTitle({pl: 'Tworzenie stron internetowych - Maciej Kowalski', en : 'Websites - Maciej Kowalski webmaster'}[lang]);
         setDescription({
@@ -53,9 +52,7 @@ function App() {
             en: 'Custom made websites - Maciej Kowalski, webmaster freelancer Lublin'
         }[lang]);
     }
-
-    LM.getLanguage().then(lang => updateLang(lang));
-    LM.addHook(updateLang);
+    LM.addListener(updateLang);
 
     return (
         <Router>

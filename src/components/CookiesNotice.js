@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import '../css/CookiesNotice.css';
 import Button from './Button';
 import { LanguageManager as LM } from '../js/languageManager';
@@ -9,9 +9,7 @@ import 'firebase/analytics';
 
 function CookiesNotice() {
     const divRef = useRef();
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then((lang) => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
 
     const hide = () => {
         divRef.current.classList.add('hide');

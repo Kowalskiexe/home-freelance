@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import '../css/OrderForm.css';
 import Button from './Button';
 import firebase from 'firebase/app';
@@ -6,9 +6,7 @@ import "firebase/firestore";
 import { LanguageManager as LM } from '../js/languageManager';
 
 function OrderForm() {
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then((lang) => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
 
     const nameRef = useRef();
     const emailRef = useRef();

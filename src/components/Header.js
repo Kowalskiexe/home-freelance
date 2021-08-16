@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Header.css';
 import CanvasAnim from './CanvasAnim';
@@ -6,29 +6,34 @@ import { drawGrad } from '../js/gradient';
 import NavButton from './NavButton';
 import { LanguageManager as LM } from '../js/languageManager';
 
-/**
- * Header with gradient animated banner
- * @param {number} height header height in px
- */
-function Header({ height = 250 }) {
+function Header() {
     const headerRef = useRef();
     const canvasRef = useRef();
 
-    const [lang, setLang] = useState('en');
-    LM.getLanguage().then((lang) => setLang(lang));
-    LM.addHook(setLang);
+    const [lang] = LM.useLanguage();
 
-    // set canvas height, inline css doens't work
+    const [height, setHeight] = useState(250);
+    const [width, setWidth] = useState(window.screen.width);
+
+    const setCanvasHeight = (height) => {
+        setHeight(height);
+        canvasRef.current.height = height;
+        document.documentElement.style.setProperty('--bg-height', height + 'px'); // inline css doens't work
+    }
+
     useEffect(() => {
-        const header = headerRef.current;
-        let canvas = canvasRef.current;
-        canvas.height = header.clientHeight;
-        document.documentElement.style.setProperty('--bg-height', header.clientHeight + 'px');
+        const resizeBackground = () => {
+            setCanvasHeight(headerRef.current.clientHeight);
+            setWidth(window.screen.width);
+        };
+        resizeBackground();
+        window.addEventListener('resize', resizeBackground);
+        return () => window.removeEventListener('resize', resizeBackground);
     }, []);
 
     return (
         <header className='header' ref={headerRef}>
-            <CanvasAnim draw={drawGrad} width={window.screen.width} height={height} ref={canvasRef} />
+            <CanvasAnim draw={drawGrad} width={width} height={height} ref={canvasRef} />
             <nav>
                 <NavButton to={{ pl: '/oferta', en: '/offer' }[lang]}>{{ pl: 'Oferta', en: 'Offer' }[lang]}</NavButton>
                 <NavButton to={{ pl: '/zamow', en: '/order' }[lang]}>{{ pl: 'Zamów', en: 'Order' }[lang]}</NavButton>

@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import CookiesManager from './cookiesManager';
 
 const COOKIE_NAME = 'lang';
 
 class LanguageManager {
     static language = undefined;
-    static hooks = [];
+    static listeners = [];
 
-    static addHook(hook) {
-        this.hooks.push(hook);
+    static addListener(listener) {
+        this.listeners.push(listener);
     }
 
     static async initLanguageByIP() {
@@ -69,7 +70,14 @@ class LanguageManager {
         this.language = lang;
         if (CookiesManager.areCookiesAccepted())
             CookiesManager.setCookie(COOKIE_NAME, this.language);
-        this.hooks.forEach(e => e(this.language));
+        this.listeners.forEach(e => e(this.language));
+    }
+
+    static useLanguage(defualt = 'en') {
+        const [lang, setLang] = useState(defualt);
+        this.addListener(setLang);
+        return [lang, setLang];
     }
 }
+LanguageManager.initLanguage().then(() => LanguageManager.setLanguage(LanguageManager.language));
 export { LanguageManager };
