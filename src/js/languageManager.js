@@ -60,7 +60,12 @@ class LanguageManager {
             return new Promise((resolve) => resolve(this.language));
     }
 
+    static setHTMLLang(lang) {
+        document.getElementsByTagName('html')[0].lang = lang;
+    }
+
     static setLanguage(lang) {
+        this.setHTMLLang(lang);
         this.language = lang;
         if (CookiesManager.areCookiesAccepted())
             CookiesManager.setCookie(COOKIE_NAME, this.language);

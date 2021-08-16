@@ -12,7 +12,6 @@ import CookiesManager from './js/cookiesManager';
 import CookiesNotice from './components/CookiesNotice';
 import { LanguageManager as LM } from './js/languageManager';
 
-
 function App() {
     const firebaseConfig = {
         apiKey: "AIzaSyARrAmZTtF-Qsv7kxmzaxkUgfVibLWqkgc",
@@ -31,9 +30,32 @@ function App() {
         firebase.analytics();
     }
 
+    const setTitle = title => {
+        document.getElementsByTagName('title')[0].innerText = title;
+    }
+
+    const setDescription = desc => {
+        let i = 0;
+        for (; i < document.head.childElementCount; ++i) {
+            if (document.head.children[i].name === 'description')
+                break;
+        }
+        document.head.children[i].content = desc;
+    }
+    
     const [lang, setLang] = useState('en');
-    LM.getLanguage().then((lang) => setLang(lang));
-    LM.addHook(setLang);
+    const updateLang = lang => {
+        setLang(lang);
+        LM.setHTMLLang(lang);
+        setTitle({pl: 'Tworzenie stron internetowych - Maciej Kowalski', en : 'Websites - Maciej Kowalski webmaster'}[lang]);
+        setDescription({
+            pl: 'Tworzenie stron internetowych na zamówienie - Maciej Kowalski, webmaster freelancer Lublin',
+            en: 'Custom made websites - Maciej Kowalski, webmaster freelancer Lublin'
+        }[lang]);
+    }
+
+    LM.getLanguage().then(lang => updateLang(lang));
+    LM.addHook(updateLang);
 
     return (
         <Router>
