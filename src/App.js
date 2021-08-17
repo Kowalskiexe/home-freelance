@@ -56,7 +56,7 @@ function App() {
 
     return (
         <Router>
-            {CookiesManager.wasVisitedBefore() ? '' : <LanguageSelector />}
+            <LanguageSelector />
             <Header />
             <Route exact path='/'>
                 <div className="content">

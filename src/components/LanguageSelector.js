@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../css/LanguageSelector.css';
+import CookiesManager from '../js/cookiesManager';
 import { LanguageManager as LM } from '../js/languageManager';
 
 function LanguageSelector() {
@@ -22,7 +23,7 @@ function LanguageSelector() {
         console.log(`selected ${lang}`);
         LM.setLanguage(lang);
     }
-    
+
     const hide = () => {
         console.log('hide');
         divRef.current.classList.add('hide');
@@ -30,23 +31,27 @@ function LanguageSelector() {
     }
 
     return (
-        <div className={matched ? 'lang-select desktop' : 'lang-select mobile'} ref={divRef}>
-            <div className='lang-opt' onClick={() => selectLang('en')}>
-                <img src='img/flags/uk.svg' alt='english' title='English' />
-                {matched ? '' : <p>English</p>}
-            </div>
-            <div className='lang-opt' onClick={() => selectLang('pl')}>
-                <img src='img/flags/poland.svg' alt='polski' title='Polski' />
-                {matched ? '' : <p>Polski</p>}
-            </div>
-            {matched ? '' :
-                <img src='img/icons/x.svg'
-                    alt={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}
-                    title={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}
-                    onClick={hide}
-                />
+        <section>
+            {(!matched && CookiesManager.wasVisitedBefore()) ? '' :
+                <div className={matched ? 'lang-select desktop' : 'lang-select mobile'} ref={divRef}>
+                    <div className='lang-opt' onClick={() => selectLang('en')}>
+                        <img src='img/flags/uk.svg' alt='english' title='English' />
+                        {matched ? '' : <p>English</p>}
+                    </div>
+                    <div className='lang-opt' onClick={() => selectLang('pl')}>
+                        <img src='img/flags/poland.svg' alt='polski' title='Polski' />
+                        {matched ? '' : <p>Polski</p>}
+                    </div>
+                    {matched ? '' :
+                        <img src='img/icons/x.svg'
+                            alt={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}
+                            title={{ pl: 'skryj wybór języka', en: 'hide langauge menu' }[lang]}
+                            onClick={hide}
+                        />
+                    }
+                </div>
             }
-        </div>
+        </section>
     );
 }
 
